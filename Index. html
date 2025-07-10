@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Amour et nostalgie</title>
+  <style>
+    body {
+      background-color: #ffd215;
+      font-size: medium;
+      text-align: center;
+      transition: background-color 1s;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      color: #ff3400c0;
+      border: 5px solid #6a78ffc0;
+      font-family: Arial, sans-serif;
+      padding: 10px;
+    }
+
+    #immersion, #citations {
+      display: none;
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+    }
+
+    img {
+      width: 200px;
+      margin: 10px;
+      border-radius: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: #ff6f61;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 10px;
+    }
+
+    button:hover {
+      background-color: #ff3b2e;
+    }
+
+    .citation {
+      font-size: 22px;
+      font-style: italic;
+      margin: 20px;
+      color: #700c7a;
+    }
+
+    /* Texte animé */
+    #texteAnime {
+      font-size: 20px;
+      color: #700c7a;
+      font-style: italic;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid black;
+      width: 0;
+      margin: 30px auto;
+      animation: typing 6s steps(60, end) forwards;
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    /* Cœurs qui tombent */
+    .heart {
+      position: fixed;
+      top: -50px;
+      font-size: 24px;
+      animation: fall 5s linear infinite;
+      color: red;
+      z-index: 9999;
+    }
+
+    @keyframes fall {
+      0% { top: -50px; opacity: 1; }
+      100% { top: 100%; opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Page d'accueil -->
+  <h1>BIENVENUE SUR LE SITE PERSONNEL DE RAMI ET ABIB</h1>
+
+  <p>Êtes-vous prêt à vivre, explorer, partager de l'émotion ?<br>
+    Si oui, ce site est bien pour toi ma dulcinée.</p>
+
+  <h3>Nous allons maintenant vivre une expérience folle.<br>
+    Avant de commencer, je tenais à te dire que je t'aime. ❤️</h3>
+
+  <button id="bouton" onclick="afficherImmersion()">Entre dans l'immersion</button>
+
+  <!-- Musiques -->
+  <audio id="musique1" src="musique.mp3" loop></audio>
+  <audio id="musique2" src="romantique.mp3" loop></audio>
+
+  <!-- Immersion -->
+  <div id="immersion">
+    <h1>Bienvenue dans notre bibliothèque personnalisée ❤️❤️❤️💒🏡☀️</h1>
+
+    <img src="ra.jpg" alt="photo 1">
+    <img src="Image1.jpg" alt="photo 2">
+    <img src="Image2.jpg" alt="photo 3">
+    <img src="image3.jpg" alt="photo 4">
+    <img src="Image8.jpg" alt="photo 5">
+
+    <p><strong><em>CECI N’EST QUE LE DÉBUT D’UNE RENCONTRE HISTORIQUE.</em></strong></p>
+
+    <img src="Image4.jpg" alt="photo 6">
+    <img src="image5.jpg" alt="photo 7">
+    <img src="ra.jpg" alt="photo 8">
+    <img src="abib.jpg" alt="photo 9">
+
+    <p style="font-size:32px;">Notre union est symbolique et je t'aimerai toujours.</p>
+
+    <img src="lifeimg.jpg" alt="photo 10">
+    <img src="space.jpg" alt="photo 11">
+
+    <button onclick="afficherCitations()">Voir les citations d'amour ❤️</button>
+  </div>
+
+  <!-- Citations d'amour -->
+  <div id="citations">
+    <h1>Nos plus belles pensées d'amour 💕</h1>
+
+    <p class="citation">"Aimer, ce n’est pas se regarder l’un l’autre, c’est regarder ensemble dans la même direction."</p>
+    <p class="citation">"Tu es la poésie que je cherchais dans chaque battement de mon cœur."</p>
+    <p class="citation">"Mon amour pour toi est comme une étoile : infini et éternel."</p>
+    <p class="citation">"Même dans le silence, ton amour parle à mon âme."</p>
+
+    <p id="texteAnime">Chaque instant passé avec toi est une éternité d'amour. 💖</p>
+
+    <img src="coeur.jpg" alt="coeur" width="200">
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    function afficherImmersion() {
+      document.getElementById("bouton").style.display = "none";
+      document.getElementById("musique1").play();
+
+      const zone = document.getElementById("immersion");
+      zone.style.display = "block";
+      setTimeout(() => {
+        zone.style.opacity = "1";
+      }, 100);
+
+      document.body.style.backgroundColor = "#fbd3e9";
+    }
+
+    function afficherCitations() {
+      document.getElementById("musique1").pause();
+      document.getElementById("musique2").play();
+
+      const zone = document.getElementById("citations");
+      zone.style.display = "block";
+      setTimeout(() => {
+        zone.style.opacity = "1";
+      }, 100);
+
+      document.body.style.backgroundColor = "#fff0f5";
+    }
+
+    // Cœurs qui tombent
+    function creerCoeur() {
+      const coeur = document.createElement("div");
+      coeur.classList.add("heart");
+      coeur.style.left = Math.random() * 100 + "vw";
+      coeur.textContent = "❤️";
+      document.body.appendChild(coeur);
+      setTimeout(() => coeur.remove(), 5000);
+    }
+
+    setInterval(creerCoeur, 800);
+  </script>
+
+</body>
+</html>
