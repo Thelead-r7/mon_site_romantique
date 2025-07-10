@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Amour et nostalgie</title>
   <style>
     body {
@@ -22,7 +22,7 @@
     #immersion, #citations {
       display: none;
       opacity: 0;
-      transition: opacity 2s ease-in-out;
+      transition: opacity 3s ease-in-out;
     }
 
     img {
@@ -41,6 +41,7 @@
       border-radius: 8px;
       cursor: pointer;
       margin: 10px;
+      transition: background-color 0.3s;
     }
 
     button:hover {
@@ -50,8 +51,10 @@
     .citation {
       font-size: 22px;
       font-style: italic;
-      margin: 20px;
+      margin: 20px auto;
+      max-width: 700px;
       color: #700c7a;
+      line-height: 1.4;
     }
 
     /* Texte animé */
@@ -65,6 +68,7 @@
       width: 0;
       margin: 30px auto;
       animation: typing 6s steps(60, end) forwards;
+      max-width: 700px;
     }
 
     @keyframes typing {
@@ -86,6 +90,14 @@
       0% { top: -50px; opacity: 1; }
       100% { top: 100%; opacity: 0; }
     }
+
+    /* Player audio */
+    #playerAudio {
+      margin: 20px auto;
+      display: block;
+      width: 320px;
+      outline: none;
+    }
   </style>
 </head>
 <body>
@@ -99,33 +111,32 @@
   <h3>Nous allons maintenant vivre une expérience folle.<br>
     Avant de commencer, je tenais à te dire que je t'aime. ❤️</h3>
 
-  <button id="bouton" onclick="afficherImmersion()">Entre dans l'immersion</button>
+  <!-- Player audio visible dès le départ -->
+  <audio id="musique1" src="musique.mp3" loop controls volume="0.5"></audio>
 
-  <!-- Musiques -->
-  <audio id="musique1" src="musique.mp3" loop></audio>
-  <audio id="musique2" src="romantique.mp3" loop></audio>
+  <button id="bouton" onclick="afficherImmersion()">Entre dans l'immersion</button>
 
   <!-- Immersion -->
   <div id="immersion">
     <h1>Bienvenue dans notre bibliothèque personnalisée ❤️❤️❤️💒🏡☀️</h1>
 
-    <img src="ra.jpg" alt="photo 1">
-    <img src="Image1.jpg" alt="photo 2">
-    <img src="Image2.jpg" alt="photo 3">
-    <img src="image3.jpg" alt="photo 4">
-    <img src="Image8.jpg" alt="photo 5">
+    <img src="ra.jpg" alt="photo 1" />
+    <img src="image1.jpg" alt="photo 2" />
+    <img src="image2.jpg" alt="photo 3" />
+    <img src="image3.jpg" alt="photo 4" />
+    <img src="image8.jpg" alt="photo 5" />
 
     <p><strong><em>CECI N’EST QUE LE DÉBUT D’UNE RENCONTRE HISTORIQUE.</em></strong></p>
 
-    <img src="Image4.jpg" alt="photo 6">
-    <img src="image5.jpg" alt="photo 7">
-    <img src="ra.jpg" alt="photo 8">
-    <img src="abib.jpg" alt="photo 9">
+    <img src="image4.jpg" alt="photo 6" />
+    <img src="image5.jpg" alt="photo 7" />
+    <img src="ra.jpg" alt="photo 8" />
+    <img src="abib.jpg" alt="photo 9" />
 
     <p style="font-size:32px;">Notre union est symbolique et je t'aimerai toujours.</p>
 
-    <img src="lifeimg.jpg" alt="photo 10">
-    <img src="space.jpg" alt="photo 11">
+    <img src="lifeimg.jpg" alt="photo 10" />
+    <img src="space.jpg" alt="photo 11" />
 
     <button onclick="afficherCitations()">Voir les citations d'amour ❤️</button>
   </div>
@@ -134,24 +145,28 @@
   <div id="citations">
     <h1>Nos plus belles pensées d'amour 💕</h1>
 
-    <p class="citation">"Aimer, ce n’est pas se regarder l’un l’autre, c’est regarder ensemble dans la même direction."</p>
-    <p class="citation">"Tu es la poésie que je cherchais dans chaque battement de mon cœur."</p>
-    <p class="citation">"Mon amour pour toi est comme une étoile : infini et éternel."</p>
-    <p class="citation">"Même dans le silence, ton amour parle à mon âme."</p>
+    <p class="citation">"Ton silence parle plus fort que tous les mots, ta force est dans ta simplicité."</p>
+    <p class="citation">"Être à tes côtés est un privilège que je chéris chaque jour."</p>
+    <p class="citation">"Ta sagesse et ta douceur illuminent mes journées les plus sombres."</p>
+    <p class="citation">"Dans la profondeur de ton regard, je trouve ma paix."</p>
 
     <p id="texteAnime">Chaque instant passé avec toi est une éternité d'amour. 💖</p>
 
-    <img src="coeur.jpg" alt="coeur" width="200">
+    <img src="coeur.jpg" alt="coeur" width="200" />
   </div>
 
   <!-- JavaScript -->
   <script>
     function afficherImmersion() {
       document.getElementById("bouton").style.display = "none";
-      document.getElementById("musique1").play();
+      const musique = document.getElementById("musique1");
+      musique.play().catch(error => {
+        console.error("Erreur lecture musique:", error);
+      });
 
       const zone = document.getElementById("immersion");
       zone.style.display = "block";
+
       setTimeout(() => {
         zone.style.opacity = "1";
       }, 100);
@@ -160,14 +175,22 @@
     }
 
     function afficherCitations() {
-      document.getElementById("musique1").pause();
-      document.getElementById("musique2").play();
+      const musique = document.getElementById("musique1");
+      musique.pause();
 
-      const zone = document.getElementById("citations");
-      zone.style.display = "block";
+      const zoneImmersion = document.getElementById("immersion");
+      zoneImmersion.style.opacity = "0";
+
       setTimeout(() => {
-        zone.style.opacity = "1";
-      }, 100);
+        zoneImmersion.style.display = "none";
+
+        const zone = document.getElementById("citations");
+        zone.style.display = "block";
+
+        setTimeout(() => {
+          zone.style.opacity = "1";
+        }, 500);
+      }, 1500);
 
       document.body.style.backgroundColor = "#fff0f5";
     }
@@ -186,4 +209,4 @@
   </script>
 
 </body>
-</html>
+    </html>
