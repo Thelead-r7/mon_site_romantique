@@ -10,19 +10,23 @@
       text-align: center;
       transition: background-color 1s;
       overflow-x: hidden;
+      font-family: Arial, sans-serif;
     }
 
     h1 {
       color: #ff3400c0;
       border: 5px solid #6a78ffc0;
-      font-family: Arial, sans-serif;
       padding: 10px;
+      margin: 20px auto;
+      max-width: 800px;
     }
 
     #immersion, #citations {
       display: none;
       opacity: 0;
       transition: opacity 3s ease-in-out;
+      max-width: 900px;
+      margin: 0 auto 50px auto;
     }
 
     img {
@@ -33,15 +37,18 @@
     }
 
     button {
-      padding: 10px 20px;
-      font-size: 18px;
+      padding: 15px 40px;
+      font-size: 22px;
       background-color: #ff6f61;
       color: white;
       border: none;
-      border-radius: 8px;
+      border-radius: 12px;
       cursor: pointer;
-      margin: 10px;
+      margin: 20px;
       transition: background-color 0.3s;
+      display: inline-block;
+      min-width: 250px;
+      user-select: none;
     }
 
     button:hover {
@@ -49,12 +56,12 @@
     }
 
     .citation {
-      font-size: 22px;
+      font-size: 24px;
       font-style: italic;
       margin: 20px auto;
       max-width: 700px;
       color: #700c7a;
-      line-height: 1.4;
+      line-height: 1.5;
     }
 
     /* Texte animé */
@@ -80,10 +87,12 @@
     .heart {
       position: fixed;
       top: -50px;
-      font-size: 24px;
+      font-size: 28px;
       animation: fall 5s linear infinite;
       color: red;
       z-index: 9999;
+      user-select: none;
+      pointer-events: none;
     }
 
     @keyframes fall {
@@ -92,11 +101,13 @@
     }
 
     /* Player audio */
-    #playerAudio {
-      margin: 20px auto;
+    #musique1 {
+      margin: 20px auto 40px auto;
       display: block;
       width: 320px;
       outline: none;
+      border-radius: 12px;
+      box-shadow: 0 0 8px #ff6f61;
     }
   </style>
 </head>
@@ -112,7 +123,7 @@
     Avant de commencer, je tenais à te dire que je t'aime. ❤️</h3>
 
   <!-- Player audio visible dès le départ -->
-  <audio id="musique1" src="musique.mp3" loop controls volume="0.5"></audio>
+  <audio id="musique1" src="musique.mp3" loop controls></audio>
 
   <button id="bouton" onclick="afficherImmersion()">Entre dans l'immersion</button>
 
@@ -158,29 +169,37 @@
   <!-- JavaScript -->
   <script>
     function afficherImmersion() {
+      // Cache le bouton d'entrée
       document.getElementById("bouton").style.display = "none";
-      const musique = document.getElementById("musique1");
-      musique.play().catch(error => {
-        console.error("Erreur lecture musique:", error);
-      });
 
+      // Affiche la section immersion progressivement
       const zone = document.getElementById("immersion");
       zone.style.display = "block";
-
       setTimeout(() => {
         zone.style.opacity = "1";
       }, 100);
 
+      // Change la couleur de fond
       document.body.style.backgroundColor = "#fbd3e9";
+
+      // Essaie de lancer la musique (si permissions OK)
+      const musique = document.getElementById("musique1");
+      musique.play().catch(e => {
+        // Pas grave si la lecture est bloquée, l'utilisateur pourra cliquer play manuellement
+        console.log("Lecture musique bloquée par navigateur:", e);
+      });
     }
 
     function afficherCitations() {
+      // Cache la musique
       const musique = document.getElementById("musique1");
       musique.pause();
 
+      // Cache la zone immersion progressivement
       const zoneImmersion = document.getElementById("immersion");
       zoneImmersion.style.opacity = "0";
 
+      // Après la transition, cache immersion et affiche citations
       setTimeout(() => {
         zoneImmersion.style.display = "none";
 
@@ -189,9 +208,10 @@
 
         setTimeout(() => {
           zone.style.opacity = "1";
-        }, 500);
+        }, 100);
       }, 1500);
 
+      // Change couleur fond
       document.body.style.backgroundColor = "#fff0f5";
     }
 
@@ -209,4 +229,4 @@
   </script>
 
 </body>
-    </html>
+</html>
