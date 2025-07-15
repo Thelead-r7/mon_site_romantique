@@ -37,18 +37,19 @@
     }
 
     button {
-      padding: 15px 40px;
-      font-size: 22px;
+      padding: 20px 50px;
+      font-size: 28px;
       background-color: #ff6f61;
       color: white;
       border: none;
-      border-radius: 12px;
+      border-radius: 16px;
       cursor: pointer;
-      margin: 20px;
+      margin: 25px;
       transition: background-color 0.3s;
       display: inline-block;
-      min-width: 250px;
+      min-width: 280px;
       user-select: none;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     }
 
     button:hover {
@@ -64,7 +65,6 @@
       line-height: 1.5;
     }
 
-    /* Texte animé */
     #texteAnime {
       font-size: 20px;
       color: #700c7a;
@@ -83,7 +83,6 @@
       to { width: 100%; }
     }
 
-    /* Cœurs qui tombent */
     .heart {
       position: fixed;
       top: -50px;
@@ -100,7 +99,6 @@
       100% { top: 100%; opacity: 0; }
     }
 
-    /* Player audio */
     #musique1 {
       margin: 20px auto 40px auto;
       display: block;
@@ -113,7 +111,6 @@
 </head>
 <body>
 
-  <!-- Page d'accueil -->
   <h1>BIENVENUE SUR LE SITE PERSONNEL DE RAMI ET ABIB</h1>
 
   <p>Êtes-vous prêt à vivre, explorer, partager de l'émotion ?<br>
@@ -122,12 +119,10 @@
   <h3>Nous allons maintenant vivre une expérience folle.<br>
     Avant de commencer, je tenais à te dire que je t'aime. ❤️</h3>
 
-  <!-- Player audio visible dès le départ -->
   <audio id="musique1" src="musique.mp3" loop controls></audio>
 
   <button id="bouton" onclick="afficherImmersion()">Entre dans l'immersion</button>
 
-  <!-- Immersion -->
   <div id="immersion">
     <h1>Bienvenue dans notre bibliothèque personnalisée ❤️❤️❤️💒🏡☀️</h1>
 
@@ -150,9 +145,13 @@
     <img src="space.jpg" alt="photo 11" />
 
     <button onclick="afficherCitations()">Voir les citations d'amour ❤️</button>
+
+    <!-- 🔘 Nouveau bouton vers la page vidéo -->
+    <a href="videos.html">
+      <button>Voir nos vidéos spéciales 🎬</button>
+    </a>
   </div>
 
-  <!-- Citations d'amour -->
   <div id="citations">
     <h1>Nos plus belles pensées d'amour 💕</h1>
 
@@ -166,56 +165,37 @@
     <img src="coeur.jpg" alt="coeur" width="200" />
   </div>
 
-  <!-- JavaScript -->
   <script>
     function afficherImmersion() {
-      // Cache le bouton d'entrée
       document.getElementById("bouton").style.display = "none";
-
-      // Affiche la section immersion progressivement
       const zone = document.getElementById("immersion");
       zone.style.display = "block";
       setTimeout(() => {
         zone.style.opacity = "1";
       }, 100);
-
-      // Change la couleur de fond
       document.body.style.backgroundColor = "#fbd3e9";
-
-      // Essaie de lancer la musique (si permissions OK)
       const musique = document.getElementById("musique1");
       musique.play().catch(e => {
-        // Pas grave si la lecture est bloquée, l'utilisateur pourra cliquer play manuellement
         console.log("Lecture musique bloquée par navigateur:", e);
       });
     }
 
     function afficherCitations() {
-      // Cache la musique
       const musique = document.getElementById("musique1");
       musique.pause();
-
-      // Cache la zone immersion progressivement
       const zoneImmersion = document.getElementById("immersion");
       zoneImmersion.style.opacity = "0";
-
-      // Après la transition, cache immersion et affiche citations
       setTimeout(() => {
         zoneImmersion.style.display = "none";
-
         const zone = document.getElementById("citations");
         zone.style.display = "block";
-
         setTimeout(() => {
           zone.style.opacity = "1";
         }, 100);
       }, 1500);
-
-      // Change couleur fond
       document.body.style.backgroundColor = "#fff0f5";
     }
 
-    // Cœurs qui tombent
     function creerCoeur() {
       const coeur = document.createElement("div");
       coeur.classList.add("heart");
@@ -229,4 +209,4 @@
   </script>
 
 </body>
-</html>
+      </html>
